@@ -1,17 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
+  console.log("server");
+
   let data = await new Date().toDateString;
-  data = JSON.parse(JSON.stringify(data));
+  data = JSON.stringify(data);
 
   return {
     props: { time: data },
   };
 }
-export default function Home({ time }) {
+export default function SSG({ time }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,21 +24,6 @@ export default function Home({ time }) {
       <main className={styles.main}>
         <h1 className={styles.title}>{time}</h1>
       </main>
-      <h1>
-        <Link href="/csr">
-          <a>CSR로</a>
-        </Link>
-      </h1>
-      <h1>
-        <Link href="/ssg">
-          <a>SSG로</a>
-        </Link>
-      </h1>
-      <h1>
-        <Link href="/isr">
-          <a>ISR로</a>
-        </Link>
-      </h1>
 
       <footer className={styles.footer}>
         <a
